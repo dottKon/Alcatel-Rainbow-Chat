@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Alcatel Rainbow Chat</title>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/es6-promise/4.0.5/es6-promise.min.js"></script>
+        <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+        <script src="//cdn.jsdelivr.net/momentjs/2.15.1/moment-with-locales.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js"></script>
+        <script src="./vendors-sdk.min.js"></script>
+        <script src="./rainbow-sdk.min.js"></script>
+        <script src="./index.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
+    </head>
+<body>
+    <!-- Login form displayed only at the beginning -->
+    <div id="login">
+        <form class="form-signin" id="loginForm">
+          <img class="mb-4" src="https://www.openrainbow.com/wp-content/uploads/2016/10/logo12.png" alt="" width="72" height="72">
+          <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+          <label for="username" class="sr-only">Email address</label>
+          <input type="email" id="username" class="form-control" placeholder="Email address" required autofocus>
+          <label for="password" class="sr-only">Password</label>
+          <input type="password" id="password" class="form-control" placeholder="Password" required>
+          <button class="btn btn-lg btn-primary btn-block" type="submit" id="signInButton">Sign in</button>
+        </form>
+        <div id="status"></div>
+    </div>
+    <!-- end of login form -->
+
+    <div class="wrapper">
+        <div id="nameDisplayed"></div>
+        <div id="statusBar">
+            <div id="avatar"><img class="mb-4" src="https://www.openrainbow.com/wp-content/uploads/2016/10/logo12.png" alt="" width="72" height="72"></div>
+            
+            <button id="signoutButton" class="btn btn-block" onclick="signOut()">Sign out</button>
+            <div id="line"></div>
+        </div>
+        <div id="conversationHeader"></div>
+        <div id="contactList"></div>
+        <div id="chatMessages">
+            <div id="messages"></div>
+        </div>
+        <div id="typer">
+            <form id="form">
+                <input id="m" autocomplete="off" placeholder="Your message" />
+                <button id="sendButton" class="btn" disabled="true">Send</button>
+            </form>
+        </div>
+
+
+    </div>
+
+
+
+</body>
+</html>
+
