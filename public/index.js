@@ -6,10 +6,8 @@ $(function() {
     angular.bootstrap(document, ["sdk"]).get("rainbowSDK");
 
 
-
+    //WAIT FOR RAINBOW SDK AND ALLOW TO LOGIN ONLY WHEN IT'S READY
     var onReady = function onReady() {
-        console.log('RAINBOW SDK READY');
-            // Listen when the SDK is ready
         $("#loginForm").submit(function logIn(){
             var myRainbowLogin = document.getElementById("username").value;
             var myRainbowPassword = document.getElementById("password").value; 
@@ -34,7 +32,7 @@ $(function() {
 
     };
 
-    // UPDATE THE CONTACT LIST
+    // POPULATE THE CONTACT LIST
     function populateContactList(){
         var contactList = rainbowSDK.contacts.getAll();
         for (var i = 0; i < contactList.length; i++) {
@@ -108,16 +106,18 @@ $(function() {
 var selectedContact = null;
 var associatedConversation = null;
 
-//SELECTING THE CONTACT
+//ACTIONS TO PERFORM WHEN SELECTING THE CONTACT
 function onContactSelected(contactId) {
     selectedContact = rainbowSDK.contacts.getContactById(contactId);
+
+    //UPDATE THE CONVERSATION HEADER ELEMENT
     var header = document.getElementById("conversationHeader");
     header.innerHTML = "Conversation with <b>" + selectedContact._displayName + "</b>" ;
+
+    //MARK CONTACT ON THE CONTACT LIST AS ACTIVE
     $("#" + contactId).addClass("active");
-    $('#sendButton').attr('disabled', false);
-    console.log(selectedContact);
 
-
+    //POPULATE THE LAST 100 MESSAGES FROM THE CONVERSATION
     rainbowSDK.conversations.openConversationForContact(selectedContact).then(function(conversation) {
         associatedConversation = conversation;
         var lastMessage = associatedConversation.lastMessageText;
@@ -135,6 +135,7 @@ function onContactSelected(contactId) {
                 messageContent = $('#m').val();
                 rainbowSDK.im.sendMessageToConversation(associatedConversation, messageContent);
                 $('#m').val('');
+
                 //Calling the function that uses API in order to make sure the conversation is up to date
                 updateView(history);
                 return false;
@@ -164,6 +165,7 @@ function onContactSelected(contactId) {
 
         };
 
+        //RECEIVING A NEW MESSAGE
         var onNewMessageReceived = function(event, message, conversation) {
             rainbowSDK.im.markMessageFromConversationAsRead(associatedConversation, message);
             var guestMessage = $("<div class=\"leftSideMessage\">" + message.data + "</div><p>");
@@ -207,13 +209,3 @@ function onContactSelected(contactId) {
 function signOut(){
     location.reload();
 }
-
-
-`
-KONRAD:
-    id: 5b34a90999cdd5499cd6508d
-KONRAD BIS:
-    id: 5b34a8d299cdd5499cd65088
-
-
-    `
